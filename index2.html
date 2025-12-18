@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Ôn tập GTinKT — Mobile</title>
+  <script>
+    // ====== DỮ LIỆU CÂU HỎI ======
+    const QUESTIONS_ORIGINAL = [{"id": 1, "text": "Cho hàm số \\(f(x)=\\begin{cases}\\dfrac{\\sqrt{2x-1}-1}{x^2-1}, & x\\ne 1\\\\ ax-4, & x=1\\end{cases}\\). Hãy tìm \\(a\\) để hàm số liên tục tại \\(x_0=1\\).", "choices": ["\\(\\frac92\\)", "\\(\\frac94\\)", "\\(\\frac12\\)", "\\(\\frac23\\)"], "correct": null}, {"id": 2, "text": "Biết \\(\\lim_{x\\to 0}\\dfrac{f(x)}{x}=4\\). Tính \\(L=\\lim_{x\\to 0}\\dfrac{f(2x)}{\\tan 3x}\\).", "choices": ["\\(\\frac{8}{3}\\)", "\\(\\frac{20}{3}\\)", "\\(\\frac{2}{5}\\)", "\\(\\frac{20}{2}\\)"], "correct": null}, {"id": 3, "text": "Cho \\(f(e^2)=4\\) và \\(f'(e^2)=8\\). Tính đạo hàm của \\(h(x)=\\ln\\!\\big(f(x^2)\\big)\\) tại \\(x_0=e\\).", "choices": ["\\(4\\)", "\\(4e\\)", "\\(2e\\)", "\\(2\\)"], "correct": null}, {"id": 4, "text": "Đạo hàm cấp 20 của hàm số \\(y=\\sin(2x)\\) là?", "choices": ["\\(20!\\,\\sin 2x\\)", "\\(0\\)", "\\(-2^{20}\\sin 2x\\)", "\\(2^{20}\\sin 2x\\)"], "correct": null}, {"id": 5, "text": "Tiếp tuyến với đồ thị \\(f(x)=x^3-3x+1\\) song song với đường thẳng \\(y=9x\\) có phương trình là?", "choices": ["\\(y=9x-1\\) hoặc \\(y=9x+3\\)", "\\(y=9x-17\\) hoặc \\(y=9x+15\\)", "\\(y=9x-3\\) hoặc \\(y=9x+1\\)", "\\(y=9x-15\\) hoặc \\(y=9x+17\\)"], "correct": null}, {"id": 6, "text": "Tính tích phân \\(\\displaystyle \\int \\frac{\\sin x}{1+\\cos^2 x}\\,dx\\).", "choices": ["\\(\\arctan(\\cos x)+C\\)", "\\(\\ln(1+\\cos^2 x)+C\\)", "\\(-\\arctan(\\cos x)+C\\)", "\\(-2\\ln(1+\\cos^2 x)+C\\)"], "correct": null}, {"id": 7, "text": "Cho hàm tổng chi phí \\(C(Q)=2Q^3-5Q^2+2000Q+5\\). Tìm chi phí biên \\(MC(Q)\\).", "choices": ["\\(6Q^3-10Q^2+2000Q\\)", "\\(6Q^2+10Q+2000\\)", "\\(6Q^2-10Q+2000\\)", "\\(\\frac{Q^4}{2}-\\frac{5Q^3}{3}+1000Q^2+5Q\\)"], "correct": null}, {"id": 8, "text": "Cho hàm cầu \\(Q=5000-P\\). Gọi \\(R\\) là hàm tổng doanh thu. Tìm doanh thu biên \\(MR(Q)\\).", "choices": ["\\(5000Q-2Q^2\\)", "\\(2Q-5000\\)", "\\(5000Q-Q^2\\)", "\\(5000-2Q\\)"], "correct": null}, {"id": 9, "text": "DN độc quyền có hàm cầu \\(Q=300-P\\) và \\(C(Q)=2Q^3-6Q^2+250Q+4\\). Tìm hàm lợi nhuận biên (marginal profit).", "choices": ["\\(-6Q^2+10Q+50\\)", "\\(6Q^2-Q+550\\)", "\\(6Q^2-2Q+250\\)", "Cả ba câu trên đều sai"], "correct": null}, {"id": 10, "text": "Cho \\(Q_S=5P-70\\), \\(Q_D=-P+110\\). Tính thặng dư sản xuất.", "choices": ["6450", "670", "660", "640"], "correct": null}, {"id": 11, "text": "Cho \\(Q_S=5P-70\\), \\(Q_D=-P+110\\). Tính thặng dư tiêu dùng.", "choices": ["3650", "3670", "3200", "3300"], "correct": null}, {"id": 12, "text": "Cho \\(Q_S=5P-70\\), \\(Q_D=-P+110\\). Tính phúc lợi xã hội \\((SW)\\).", "choices": ["\\(SW=3860\\)", "\\(SW=3840\\)", "\\(SW=3100\\)", "\\(SW=3340\\)"], "correct": null}, {"id": 13, "text": "Biết \\(MR(Q)=100-4Q-6Q^2\\). Xác định hàm tổng doanh thu \\(TR(Q)\\) (bỏ hằng số).", "choices": ["\\(TR(Q)=3Q^2+4Q\\)", "\\(TR(Q)=100Q+4Q^2+2Q^3\\)", "\\(TR(Q)=3Q^2+20Q+100\\)", "\\(TR(Q)=-2Q^3-2Q^2+100Q\\)"], "correct": null}, {"id": 14, "text": "Tính tổng chuỗi \\(\\displaystyle \\sum_{n=1}^{\\infty}\\frac{1}{4n^2-1}\\).", "choices": ["\\(\\frac12\\)", "\\(\\frac13\\)", "\\(\\frac14\\)", "\\(\\frac15\\)"], "correct": null}, {"id": 15, "text": "Tỉ lệ tăng dân số 1,06%/năm. Năm 2014 dân số 90, 728, 900 người. Hỏi năm 2035 dân số là bao nhiêu? (làm tròn đến hàng nghìn)", "choices": ["110.800.456 người", "113,276,846 người", "115.120.234 người", "118.000.676 người"], "correct": null}, {"id": 16, "text": "Gửi 50 triệu đồng vào đầu mỗi tháng, lãi kép 1%/tháng. Sau bao nhiêu tháng số tiền vượt 900 triệu đồng?", "choices": ["16 tháng", "17 tháng", "18 tháng", "19 tháng"], "correct": null}, {"id": 17, "text": "Đầu tư 300 triệu đồng, lãi kép 12%/năm, trong 5 năm. Số tiền lãi nhận được là bao nhiêu? (làm tròn nghìn đồng)", "choices": ["210,000 triệu đồng", "228,703 triệu đồng", "235,500 triệu đồng", "528,703 triệu đồng"], "correct": null}, {"id": 18, "text": "Tính tích phân \\(I=\\displaystyle \\int \\frac{2\\,dx}{1+\\cos^2 x}\\).", "choices": ["\\(I=\\sin x+C\\)", "\\(I=\\cos x+C\\)", "\\(I=\\cot x+C\\)", "\\(I=\\tan x+C\\)"], "correct": null}, {"id": 19, "text": "Nghiệm tổng quát của phương trình vi phân \\(y'+y\\tan x=\\frac{1}{\\cos x}\\) là:", "choices": ["\\(y=\\cos x+C\\tan x\\)", "\\(y=\\sin x+C\\cos x\\)", "\\(y=\\sin x+C\\cot x\\)", "\\(y=\\cos x+C\\sin x\\)"], "correct": null}, {"id": 20, "text": "Cho \\(P(x,y)=-2x^2-3y^2-2xy+100x+120y-500\\). Tìm \\((x,y)\\) để lợi nhuận tối đa.", "choices": ["\\(x=10,y=10\\)", "\\(x=20,y=15\\)", "\\(x=18,y=14\\)", "\\(x=14,y=18\\)"], "correct": null}, {"id": 21, "text": "Gọi \\(P_5(x)\\) là đa thức Maclaurin bậc 5 của \\(f(x)=\\frac{1}{1-x}\\). Kết quả đúng là?", "choices": ["\\(1+\\frac{x}{1!}+\\frac{x^2}{2!}+\\frac{x^3}{3!}+\\frac{x^4}{4!}+\\frac{x^5}{5!}\\)", "\\(1+x+x^2+x^3+x^4+x^5\\)", "\\(x+\\frac{x^2}{2}+\\frac{x^3}{3}+\\frac{x^4}{4}+\\frac{x^5}{5}\\)", "\\(1-x+x^2-x^3+x^4-x^5\\)"], "correct": null}, {"id": 22, "text": "Tính tích phân suy rộng \\(I=\\displaystyle\\int_{-\\infty}^{+\\infty}\\frac{1}{1+x^2}\\,dx\\).", "choices": ["\\(2\\pi\\)", "\\(\\pi\\)", "\\(+\\infty\\)", "\\(0\\)"], "correct": null}, {"id": 23, "text": "Xét sự hội tụ của chuỗi \\(\\displaystyle \\sum_{n=1}^{\\infty}\\frac{1}{\\sqrt{n}\\,(e^{1/n}-1)}\\).", "choices": ["Hội tụ", "Phân kì", "Bán hội tụ", "Hội tụ tuyệt đối"], "correct": null}, {"id": 24, "text": "Miền xác định \\(D\\) của \\(f(x,y)=\\dfrac{3x+5y}{y^2}\\) là", "choices": ["\\(D=\\{(x,y)\\in\\mathbb{R}^2: y\\ne 0\\}\\)", "\\(D=\\{(x,y)\\in\\mathbb{R}^2: 3x+5y\\ne 0\\}\\)", "\\(D=\\{(x,y)\\in\\mathbb{R}^2: y>0\\}\\)", "\\(D=\\{(x,y)\\in\\mathbb{R}^2: 3x+5y>0\\}\\)"], "correct": null}, {"id": 25, "text": "Tính giới hạn \\(\\displaystyle \\lim_{(x,y)\\to(0,0)}\\frac{e^{\\sin x-\\cos x}}{\\sin(xy)}\\).", "choices": ["\\(0\\)", "\\(5\\)", "\\(\\frac12\\)", "Không tồn tại"], "correct": null}];
+
+    // ====== CẤU HÌNH ======
+    // Thời gian làm bài mặc định (phút). Có thể đổi bằng URL: ?t=60
+    const DEFAULT_MINUTES = 60;
+
+    // Nếu muốn CHẤM ĐIỂM, điền đáp án đúng theo THỨ TỰ ID gốc (1..25), dạng 0..3.
+    // Ví dụ: const ANSWER_KEY = {1:0, 2:1, ...};
+    const ANSWER_KEY = {"1": 0, "2": 0, "3": 1, "4": 3, "5": 3, "6": 2, "7": 2, "8": 3, "9": 1, "10": 3, "11": 2, "12": 1, "13": 3, "14": 0, "15": 1, "16": 1, "17": 1, "18": 3, "19": 1, "20": 2, "21": 1, "22": 1, "23": 3, "24": 1, "25": 3};
+    const SCORE_PER_QUESTION = 0.4;
+
+    // ====== TIỆN ÍCH ======
+    const $ = (sel) => document.querySelector(sel);
+
+    function shuffle(array) {
+      const a = array.slice();
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function parseMinutesFromURL() {
+      const p = new URLSearchParams(location.search);
+      const t = Number(p.get("t"));
+      if (Number.isFinite(t) && t > 0 && t <= 300) return Math.floor(t);
+      return DEFAULT_MINUTES;
+    }
+
+    function formatTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+    }
+
+    // ====== TRẠNG THÁI ======
+    let minutes = parseMinutesFromURL();
+    let timeLeft = minutes * 60;
+    let timer = null;
+
+    // questions: mảng đã trộn thứ tự + trộn đáp án (kèm map)
+    let questions = [];
+    // answers: lưu theo index của questions[] -> choiceIndex (0..3)
+    let answers = {};
+    let flagged = {};
+    let currentIndex = 0;
+    let submitted = false;
+
+    // Local storage key (mỗi đề 1 key)
+    const STORAGE_KEY = "calc_econ_exam_v1";
+
+    function buildShuffledQuestions() {
+      const base = QUESTIONS_ORIGINAL.map(q => ({
+        id: q.id,
+        text: q.text,
+        choices: q.choices.slice()
+      }));
+
+      const order = shuffle(base);
+      const withChoiceShuffle = order.map(q => {
+        const choiceObjs = q.choices.map((txt, idx) => ({ txt, originalIdx: idx }));
+        const shuffled = shuffle(choiceObjs);
+        return {
+          id: q.id,
+          text: q.text,
+          choices: shuffled.map(x => x.txt),
+          mapNewToOld: shuffled.map(x => x.originalIdx)
+        };
+      });
+      return withChoiceShuffle;
+    }
+
+    function saveState() {
+      const state = {
+        minutes,
+        timeLeft,
+        questions,
+        answers,
+        flagged,
+        currentIndex,
+        submitted,
+        ts: Date.now()
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return false;
+        const state = JSON.parse(raw);
+        if (!state || !Array.isArray(state.questions)) return false;
+
+        minutes = state.minutes ?? minutes;
+        timeLeft = state.timeLeft ?? timeLeft;
+        questions = state.questions;
+        answers = state.answers ?? {};
+        flagged = state.flagged ?? {};
+        currentIndex = state.currentIndex ?? 0;
+        submitted = !!state.submitted;
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function resetAll() {
+      localStorage.removeItem(STORAGE_KEY);
+      minutes = parseMinutesFromURL();
+      timeLeft = minutes * 60;
+      questions = buildShuffledQuestions();
+      answers = {};
+      flagged = {};
+      currentIndex = 0;
+      submitted = false;
+      renderAll();
+      startTimer();
+      saveState();
+    }
+
+    // ====== RENDER ======
+    function renderHeader() {
+      $("#meta").textContent = `• Thiết kế bởi dhkiet • Cấu trúc 25 câu • Thời gian làm bài ${minutes} phút`;
+      $("#timer").textContent = formatTime(timeLeft);
+      $("#progress").textContent = `${currentIndex + 1} / ${questions.length}`;
+      const answeredCount = Object.keys(answers).length;
+      $("#answered").textContent = `Đã chọn: ${answeredCount}/${questions.length}`;
+    }
+
+    function renderQuestion() {
+      const q = questions[currentIndex];
+      $("#qId").textContent = `Câu ${currentIndex + 1}`;
+      $("#qText").innerHTML = q.text;
+
+      const list = $("#choices");
+      list.innerHTML = "";
+
+      const selected = answers[currentIndex];
+      q.choices.forEach((choiceText, i) => {
+        const btn = document.createElement("button");
+        btn.className = "choice";
+        btn.type = "button";
+        btn.innerHTML = `<span class="badge">${String.fromCharCode(65 + i)}</span>
+                         <span class="ct">${choiceText}</span>`;
+        if (selected === i) btn.classList.add("selected");
+        btn.addEventListener("click", () => {
+          if (submitted) return;
+          answers[currentIndex] = i;
+          saveState();
+          renderQuestion();
+          renderHeader();
+          typesetMath();
+        });
+        list.appendChild(btn);
+      });
+
+      // Flag
+      const isFlagged = !!flagged[currentIndex];
+      $("#flagBtn").classList.toggle("on", isFlagged);
+      $("#flagBtn").textContent = isFlagged ? "★ Đã đánh dấu" : "☆ Đánh dấu";
+
+      // Nav buttons
+      $("#prevBtn").disabled = currentIndex === 0 || submitted;
+      $("#nextBtn").disabled = currentIndex === questions.length - 1 || submitted;
+
+      $("#jumpInfo").textContent = isFlagged ? "Câu này đang được đánh dấu để xem lại." : "";
+    }
+
+    function renderGrid() {
+      const grid = $("#grid");
+      grid.innerHTML = "";
+      questions.forEach((_, i) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "cell";
+        b.textContent = String(i + 1);
+        if (i === currentIndex) b.classList.add("active");
+        if (answers[i] !== undefined) b.classList.add("answered");
+        if (flagged[i]) b.classList.add("flagged");
+        b.addEventListener("click", () => {
+          if (submitted) return;
+          currentIndex = i;
+          saveState();
+          renderAll();
+        });
+        grid.appendChild(b);
+      });
+    }
+
+    function renderSubmitPanel() {
+      $("#submitBtn").disabled = submitted;
+      $("#resetBtn").disabled = false;
+      $("#reviewBtn").disabled = submitted;
+      $("#submitBtn").textContent = submitted ? "Đã nộp bài" : "Nộp bài";
+    }
+
+    function renderResult() {
+      const box = $("#result");
+      box.innerHTML = "";
+      if (!submitted) {
+        box.classList.add("hidden");
+        return;
+      }
+      box.classList.remove("hidden");
+
+      const total = questions.length;
+      const answeredCount = Object.keys(answers).length;
+
+      let scoreBlock = "";
+      if (ANSWER_KEY) {
+        let correct = 0;
+        for (let i = 0; i < total; i++) {
+          const q = questions[i];
+          const chosen = answers[i];
+          if (chosen === undefined) continue;
+          const chosenOriginal = q.mapNewToOld[chosen];
+          if (ANSWER_KEY[q.id] === chosenOriginal) correct++;
+        }
+        const score = (correct * SCORE_PER_QUESTION);
+        scoreBlock = `<div class="score">Số câu đúng: <b>${correct}/${total}</b> • Điểm: <b>${score.toFixed(1)}/10</b></div>`;
+      } else {
+        scoreBlock = `<div class="score muted">Chưa chấm điểm vì chưa có đáp án.</div>`;
+      }
+
+      const rows = [];
+      for (let i = 0; i < total; i++) {
+        const chosen = answers[i];
+        const chosenLabel = (chosen === undefined) ? "—" : String.fromCharCode(65 + chosen);
+        rows.push(`<div class="sumrow"><span>Câu ${i+1}</span><span class="pill">${chosenLabel}</span></div>`);
+      }
+
+      box.innerHTML = `
+        <h3>Kết quả / Tóm tắt bài làm</h3>
+        <div class="meta2">Đã chọn: <b>${answeredCount}/${total}</b> • Thời gian còn lại khi nộp: <b>${formatTime(timeLeft)}</b></div>
+        ${scoreBlock}
+        <div class="sum">${rows.join("")}</div>
+      `;
+    }
+
+    function typesetMath() {
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise();
+      }
+    }
+
+    function renderAll() {
+      renderHeader();
+      renderQuestion();
+      renderGrid();
+      renderSubmitPanel();
+      renderResult();
+      typesetMath();
+    }
+
+    // ====== TIMER ======
+    function startTimer() {
+      stopTimer();
+      $("#timer").textContent = formatTime(timeLeft);
+      timer = setInterval(() => {
+        if (submitted) return;
+        timeLeft--;
+        if (timeLeft <= 0) {
+          timeLeft = 0;
+          $("#timer").textContent = formatTime(timeLeft);
+          submitExam(true);
+          return;
+        }
+        $("#timer").textContent = formatTime(timeLeft);
+        if (timeLeft % 5 === 0) saveState();
+      }, 1000);
+    }
+
+    function stopTimer() {
+      if (timer) clearInterval(timer);
+      timer = null;
+    }
+
+    // ====== SUBMIT ======
+    function submitExam(auto=false) {
+      if (submitted) return;
+      submitted = true;
+      stopTimer();
+      saveState();
+
+      $("#toast").textContent = auto ? "Hết giờ — bài đã được nộp tự động." : "Đã nộp bài.";
+      $("#toast").classList.remove("hidden");
+      setTimeout(() => $("#toast").classList.add("hidden"), 2500);
+
+      renderAll();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // ====== INIT ======
+    window.addEventListener("DOMContentLoaded", () => {
+      const hasState = loadState();
+      if (!hasState) {
+        questions = buildShuffledQuestions();
+        saveState();
+      }
+      renderAll();
+      if (!submitted) startTimer();
+
+      $("#prevBtn").addEventListener("click", () => {
+        if (submitted) return;
+        if (currentIndex > 0) {
+          currentIndex--;
+          saveState();
+          renderAll();
+        }
+      });
+
+      $("#nextBtn").addEventListener("click", () => {
+        if (submitted) return;
+        if (currentIndex < questions.length - 1) {
+          currentIndex++;
+          saveState();
+          renderAll();
+        }
+      });
+
+      $("#flagBtn").addEventListener("click", () => {
+        if (submitted) return;
+        flagged[currentIndex] = !flagged[currentIndex];
+        saveState();
+        renderAll();
+      });
+
+      $("#reviewBtn").addEventListener("click", () => {
+        if (submitted) return;
+        for (let i = 0; i < questions.length; i++) {
+          if (answers[i] === undefined) {
+            currentIndex = i;
+            saveState();
+            renderAll();
+            return;
+          }
+        }
+        $("#toast").textContent = "Bạn đã chọn đáp án cho tất cả câu.";
+        $("#toast").classList.remove("hidden");
+        setTimeout(() => $("#toast").classList.add("hidden"), 1800);
+      });
+
+      $("#submitBtn").addEventListener("click", () => {
+        if (submitted) return;
+        const unanswered = questions.length - Object.keys(answers).length;
+        if (unanswered > 0) {
+          const ok = confirm(`Còn ${unanswered} câu chưa chọn. Vẫn nộp bài?`);
+          if (!ok) return;
+        } else {
+          const ok = confirm("Nộp bài ngay?");
+          if (!ok) return;
+        }
+        submitExam(false);
+      });
+
+      $("#resetBtn").addEventListener("click", () => {
+        const ok = confirm("Làm lại từ đầu? (Sẽ trộn lại đề và xóa bài đang làm)");
+        if (!ok) return;
+        resetAll();
+      });
+    });
+  </script>
+
+  <!-- MathJax -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["\\(","\\)"], ["$","$"]],
+        displayMath: [["\\[","\\]"], ["$$","$$"]]
+      },
+      options: {
+        skipHtmlTags: ["script","noscript","style","textarea","pre","code"]
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --card: #111827;
+      --muted: #9ca3af;
+      --text: #e5e7eb;
+      --accent: #22c55e;
+      --accent2: #60a5fa;
+      --danger: #ef4444;
+      --border: rgba(255,255,255,0.08);
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: linear-gradient(180deg, #070a10, var(--bg));
+      color: var(--text);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 14px 12px 22px;
+      padding-bottom: calc(22px + env(safe-area-inset-bottom));
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(11,15,23,0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 12px;
+      margin: -14px -12px 12px;
+    }
+    .row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .title {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
+    .meta {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      font-size: 12px;
+      color: var(--text);
+      user-select: none;
+    }
+    .pill b { font-weight: 800; }
+    .timer {
+      border-color: rgba(239,68,68,0.35);
+      background: rgba(239,68,68,0.08);
+    }
+    .card {
+      background: rgba(17,24,39,0.9);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 14px;
+    }
+    .qhead {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .qid {
+      font-size: 14px;
+      font-weight: 900;
+    }
+    .qtext {
+      margin-top: 10px;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+    .choices {
+      margin-top: 12px;
+      display: grid;
+      gap: 10px;
+    }
+    .choice {
+      width: 100%;
+      text-align: left;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 12px 12px;
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      align-items: start;
+      font-size: 16px;
+      line-height: 1.4;
+      cursor: pointer;
+    }
+    .choice:active { transform: scale(0.99); }
+    .choice.selected {
+      border-color: rgba(34,197,94,0.65);
+      background: rgba(34,197,94,0.10);
+    }
+    .badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      background: rgba(96,165,250,0.14);
+      border: 1px solid rgba(96,165,250,0.25);
+      color: #dbeafe;
+      user-select: none;
+    }
+    .ct { padding-top: 2px; }
+
+    .nav {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .btn {
+      flex: 1;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 12px 12px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn.primary {
+      background: rgba(34,197,94,0.16);
+      border-color: rgba(34,197,94,0.30);
+    }
+    .btn.warn {
+      background: rgba(239,68,68,0.14);
+      border-color: rgba(239,68,68,0.30);
+    }
+    .btn.ghost { background: transparent; }
+    .subbar { margin-top: 12px; display: grid; gap: 10px; }
+    .mini { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+    .grid {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(10, minmax(0, 1fr));
+      gap: 8px;
+    }
+    @media (max-width: 420px) {
+      .grid { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+    }
+    .cell {
+      border-radius: 12px;
+      padding: 10px 0;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      font-weight: 800;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .cell.active { outline: 2px solid rgba(96,165,250,0.55); }
+    .cell.answered { border-color: rgba(34,197,94,0.55); background: rgba(34,197,94,0.10); }
+    .cell.flagged { border-color: rgba(250,204,21,0.65); background: rgba(250,204,21,0.10); }
+
+    .hint { color: var(--muted); font-size: 12px; margin-top: 10px; line-height: 1.35; }
+    .muted { color: var(--muted); }
+    .jumpInfo { margin-top: 8px; font-size: 12px; color: rgba(250,204,21,0.9); }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 16px;
+      background: rgba(17,24,39,0.95);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      z-index: 50;
+      font-weight: 700;
+      max-width: 92vw;
+      text-align: center;
+    }
+    .hidden { display: none; }
+
+    .result { margin-top: 12px; }
+    .result h3 { margin: 0 0 6px; font-size: 16px; }
+    .meta2 { color: var(--muted); font-size: 12px; margin-bottom: 10px; }
+    .score {
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(96,165,250,0.10);
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    .score.muted { background: rgba(255,255,255,0.03); color: var(--muted); }
+    .sum { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .sumrow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="row">
+      <div>
+        <div class="title">Ôn tập GTinKT HK1 (2025-2026) - THAM KHẢO 2</div>
+        <div class="meta" id="meta"></div>
+      </div>
+      <div class="row" style="gap:8px;">
+        <div class="pill timer">⏱️ <b id="timer">--:--</b></div>
+        <div class="pill">📌 <b id="progress">0/0</b></div>
+      </div>
+    </div>
+    <div class="row" style="margin-top:8px;">
+      <div class="pill">✅ <span id="answered">Đã chọn: 0/0</span></div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="card">
+      <div class="qhead">
+        <div class="qid" id="qId">Câu 1</div>
+        <button class="btn ghost" id="flagBtn" type="button">☆ Đánh dấu</button>
+      </div>
+      <div class="qtext" id="qText"></div>
+
+      <div class="choices" id="choices"></div>
+      <div class="jumpInfo" id="jumpInfo"></div>
+
+      <div class="nav">
+        <button class="btn" id="prevBtn" type="button">⬅️ Trước</button>
+        <button class="btn" id="nextBtn" type="button">Sau ➡️</button>
+      </div>
+
+      <div class="subbar">
+        <div class="mini">
+          <button class="btn" id="reviewBtn" type="button">🔎 Tới câu chưa làm</button>
+          <button class="btn primary" id="submitBtn" type="button">Nộp bài</button>
+        </div>
+        <div class="mini">
+          <button class="btn warn" id="resetBtn" type="button">🔁 Làm lại (trộn lại đề)</button>
+          <div class="hint">* Khi nộp bài (hoặc hết giờ), hệ thống khóa chọn đáp án và hiện tóm tắt bài làm.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:12px;">
+      <div class="row">
+        <div style="font-weight:900;">Bảng câu hỏi</div>
+        <div class="muted" style="font-size:12px;">Xanh = đã chọn • Vàng = đánh dấu</div>
+      </div>
+      <div class="grid" id="grid"></div>
+      <div class="hint">
+        Nếu thoát trình duyệt rồi mở lại, bài vẫn còn (chưa nộp).
+      </div>
+    </div>
+
+    <div class="card result hidden" id="result"></div>
+
+  </div>
+
+  <div class="toast hidden" id="toast"></div>
+</body>
+</html>
